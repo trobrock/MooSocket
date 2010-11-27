@@ -21,8 +21,10 @@ var MooSocket = new Class({
   options: {
     reconnect: true, 
     maxReconnects: 10, 
+    onOpen: Function.from(), 
     onMessage: Function.from(), 
-    onClose: Function.from()
+    onClose: Function.from(), 
+    onError: Function.from()
   }, 
   reconnectDelay: 0, 
   reconnectAttempts: 0, 
@@ -49,6 +51,14 @@ var MooSocket = new Class({
     this.socket.onclose = function(e){
       this.fireEvent("close")
       if (this.options.reconnect) this.reconnect()
+    }.bind(this)
+    
+    this.socket.onopen = function(e){
+      this.fireEvent("open", [e.data, e])
+    }.bind(this)
+    
+    this.socket.onerror = function(e){
+      this.fireEvent("error", [e.data, e])
     }.bind(this)
     
     return this

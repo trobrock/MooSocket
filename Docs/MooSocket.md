@@ -28,7 +28,9 @@ MooSocket Method: constructor {#MooSocket:constructor}
 
 ### Events:
 
+* onOpen -
 * onMessage -
+* onError -
 * onClose -
 
 
