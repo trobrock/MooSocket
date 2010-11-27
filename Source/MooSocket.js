@@ -1,0 +1,46 @@
+var MooSocket = new Class({
+  Implements: [Options, Events], 
+  
+  options: {
+    reconnect: true, 
+    maxReconnects: 10, 
+    onMessage: Function.from(), 
+    onClose: Function.from()
+  }, 
+  reconnectDelay: 0, 
+  reconnectAttempts: 0, 
+  
+  initialize: function(location, options){
+    if (!("WebSocket" in window)) return false
+    
+    this.setOptions(options)
+    this.location = location
+    
+    this.create()
+  }, 
+  
+  create: function(){
+    this.socket = new WebSocket(location)
+    this.attachEvents()
+  }, 
+  
+  attachEvents: function(){
+    this.socket.onmessage = function(e){
+      this.fireEvent("message", [e.data, e])
+    }.bind(this)
+    
+    this.socket.onclose = function(e){
+      this.fireEvent("close")
+      if (this.options.reconnect) this.reconnect()
+    }.bind(this)
+    
+    return this
+  }, 
+  
+  reconnect: function(){
+    if (this.reconnectAttempts > this.options.maxReconnects) return false
+    this.create.delay(this.reconnectDelay * 1000)
+    this.reconnectDelay = 2 * this.reconnectAttempts
+    this.reconnectAttempts++
+  }
+})
