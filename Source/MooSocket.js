@@ -1,3 +1,20 @@
+/*
+---
+description: MooSocket class, a basic WebSocket wrapper for MooTools
+
+license: MIT-style
+
+authors:
+- Trae Robrock
+
+requires:
+- core/1.3: '*'
+
+provides: MooSocket
+
+...
+*/
+
 var MooSocket = new Class({
   Implements: [Options, Events], 
   
