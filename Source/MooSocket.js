@@ -67,7 +67,7 @@ var MooSocket = new Class({
   reconnect: function(){
     if (this.reconnectAttempts > this.options.maxReconnects) return false
     this.create.delay(this.reconnectDelay * 1000)
-    this.reconnectDelay = 2 * this.reconnectAttempts
     this.reconnectAttempts++
+    this.reconnectDelay = 2 * this.reconnectAttempts
   }
 })

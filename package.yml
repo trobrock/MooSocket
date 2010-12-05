@@ -2,6 +2,6 @@ name: MooSocket
 author: trobrock
 category: Native
 tags: [websocket, wrapper]
-current: 0.2.1
+current: 0.3
 #docs: http://url.to.docs
 #demo: http://url.to.demo

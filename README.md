@@ -29,3 +29,8 @@ This class also allows for automatically attempting to reconnect to the socket w
         // An Event for when the connection to the socket is closed
       }
     })
+
+Running the tests
+-----------------
+
+To run the Jasmine Specs for the project just open up SpecRunner.html in your browser.
